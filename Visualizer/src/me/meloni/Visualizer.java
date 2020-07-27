@@ -13,9 +13,12 @@ public class Visualizer {
         // write your code here
         //MainWindow.createwindow();
 
-        System.out.println(Reader.usefullinfo());
+        //System.out.println(Reader.usefullinfo());
 
-
+        for(int i = 0; i < Reader.mindata().size() - 1; i++) {
+          System.out.println(Reader.mindata().get(i));
+        }
+        //System.out.println(Reader.mindata().get(9215));
 
 
 
