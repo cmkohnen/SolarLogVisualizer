@@ -1,7 +1,6 @@
 package me.meloni;
 
 import me.meloni.FileReading.Reader;
-import me.meloni.UserGUI.MainWindow;
 
 import java.io.IOException;
 
