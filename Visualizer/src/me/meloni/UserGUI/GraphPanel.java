@@ -1,7 +1,11 @@
 package me.meloni.UserGUI;
 
+import me.meloni.Tools.DateConverter;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
@@ -148,32 +152,81 @@ public class GraphPanel extends JPanel {
     }
 
     public static void createAndShowGui(Map<String, List<Integer>> map) {
-        List<Double> scores = new ArrayList<>();
-        Random random = new Random();
-        int maxDataPoints = map.size() - 1;
-        List<Integer> Scores = new ArrayList<>();
-         map.values().forEach(s ->{
-                    Scores.add(s.get(0));
-                }
-                );
+        JFrame f = new JFrame("Date");
+        JButton b=new JButton("Select");
+        b.setBounds(100,100,140, 40);
+        //enter name label
+        JLabel label = new JLabel();
+        label.setText("Day-Timestamp:");
+        label.setBounds(10, 10, 100, 100);
+        //textfield to enter name
+        JTextField textfield= new JTextField();
+        textfield.setBounds(110, 50, 130, 30);
+        //add to frame
+        f.add(textfield);
+        f.add(label);
+        f.add(b);
 
-        int maxScore = Scores.stream().mapToInt(v->v).max().orElseThrow(NoSuchElementException::new);
+        f.setSize(300,300);
+        f.setLayout(null);
+        f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        List<String> timestamps = new ArrayList<String>(map.keySet());
+        b.addActionListener(new ActionListener() {
 
-        for (int i = 0; i < maxDataPoints; i++) {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println(textfield.getText());
+                String str = textfield.getText();
+                //validate
+                if (str.length() == 6) {
+                    List<String> timestamps = DateConverter.Timestampsperday(str);
+
+                    List<Double> scores = new ArrayList<>();
+                    Random random = new Random();
+                    int maxDataPoints = 288;
+                    List<Integer> Scores = new ArrayList<>();
+                    Integer score = 0;
+
+                    for(int i = 0; i < 287; i++) {
+                        score = map.get(timestamps.get(i)).get(0);
+                        double scored = score;
+                        System.out.println(scored);
+                        scores.add(scored);
+                    }
+
+
+                    //int maxScore = Scores.stream().mapToInt(v->v).max().orElseThrow(NoSuchElementException::new);
+                    int maxScore = 2000;
+
+                    //List<String> timestamps = new ArrayList<String>(map.keySet());
+
+
+        /*for (int i = 0; i < maxDataPoints; i++) {
             scores.add((double) map.get(timestamps.get(i)).get(0));
 
             //scores.add((double) random.nextDouble() * maxScore);
 //            scores.add((double) i);
         }
-        GraphPanel mainPanel = new GraphPanel(scores);
-        mainPanel.setPreferredSize(new Dimension(800, 600));
-        JFrame frame = new JFrame("Visualize");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
+         */
+                    GraphPanel mainPanel = new GraphPanel(scores);
+                    mainPanel.setPreferredSize(new Dimension(800, 600));
+                    JFrame frame = new JFrame("Visualize");
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.getContentPane().add(mainPanel);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                }
+
+            }
+        });
+
+
+
+
+
+
     }
 }
