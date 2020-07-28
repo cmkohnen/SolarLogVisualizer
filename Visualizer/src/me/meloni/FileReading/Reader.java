@@ -9,16 +9,16 @@ import java.util.Collections;
 import java.util.List;
 
 public class Reader {
-    static String path = "E:\\test\\backup_data_22.07.20.dat";
+    //static String path = "E:\\test\\backup_data_22.07.20.dat";
 
 
 
-    public static String WholeContent() throws IOException {
+    public static String WholeContent(String path) throws IOException {
         return new String(Files.readAllBytes(Paths.get(path)));
     }
 
-    public static String usefullinfo() throws  IOException{
-        String base = alllines().get(0);
+    public static String usefullinfo(String path) throws  IOException{
+        String base = alllines(path).get(0);
 
         StringBuilder info = new StringBuilder();
         info.append("Model name: ");
@@ -34,8 +34,8 @@ public class Reader {
         return info.toString();
     }
 
-    public static List<String> mindata() throws IOException {
-        List<String> lines = alllines();
+    public static List<String> mindata(String path) throws IOException {
+        List<String> lines = alllines(path);
         List<String> mindata = new ArrayList<>(Collections.singletonList(""));
         for(int i = 55; i < 9271; i++) {
             mindata.add(lines.get(i));
@@ -46,8 +46,8 @@ public class Reader {
 
 
 
-    public static List<String> alllines() throws IOException {
-        String content = WholeContent();
+    public static List<String> alllines(String path) throws IOException {
+        String content = WholeContent(path);
         String[] str = content.split("\n");
         List<String> al;
         al = Arrays.asList(str);
