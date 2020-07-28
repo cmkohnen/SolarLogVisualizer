@@ -41,6 +41,24 @@ public class MainWindow extends JFrame {
 
             panel.add(b1);
 
+
+
+
+            JButton b2 = new JButton("visualize");
+            b2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Visualize.visualize();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+
+
+            panel.add(b2);
+
             //JScrollPane jScrollPane = new JScrollPane(jEditorPane);
             //jScrollPane.setPreferredSize(new Dimension(540,400));
 

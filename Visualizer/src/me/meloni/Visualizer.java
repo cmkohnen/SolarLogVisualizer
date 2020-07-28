@@ -1,12 +1,13 @@
 package me.meloni;
 
+import me.meloni.DataStorage.Read;
 import me.meloni.UserGUI.MainWindow;
 
 import java.io.IOException;
 
 public class Visualizer {
 
-    public static final String version = "0.0.0.0.3";
+    public static final int version = 3;
 
 
     public static void main(String[] args) throws IOException {

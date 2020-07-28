@@ -7,84 +7,12 @@ public class Values {
 
     /*
     Positions of values in List<String> format
-
-
-
-
-
-
+        Verbrauch W: 6
+        Verbrauch kWh: 10
+        Leistung W: 17
+        Ertrag KWh: 23
+        Eigenverbrauch W: 44
      */
-
-
-
-
-
-
-
-
-
-    public static List<Integer> Verbrauchaslist(String path) throws IOException {
-        List<String> mindata = Reader.mindata(path);
-        List<Integer> Verbrauch = new ArrayList();
-
-        /*for(int i = 1; i < mindata.size(); i++){
-            Verbrauch.add(Integer.getInteger(Wertereihe(i).get(6)));
-            System.out.println(Wertereihe(i).get(2) + " Verbrauch: " + Wertereihe(i).get(6));
-        }*/
-
-        mindata.forEach(item->{
-            String[] str = item.split(";");
-            List<String> values = Arrays.asList(str);
-            int verbrauch;
-            try {
-                verbrauch = Integer.parseInt(values.get(6));
-            }
-            catch (NumberFormatException e)
-            {
-                verbrauch = 0;
-            }
-            Verbrauch.add(verbrauch);
-            //System.out.println(values.get(2) + " Verbrauch: " + verbrauch);
-        });
-
-
-
-
-
-
-        return Verbrauch;
-    }
-
-
-
-    public static Map<String, Integer> Verbrauchasmap(String path) throws IOException{
-        List<String> mindata = Reader.mindata(path);
-        Map<String, Integer> Verbrauch = new HashMap<>();
-
-
-
-        //Loop functional but slow
-        /*for(int i = 1; i < mindata.size(); i++){
-            Verbrauch.add(Integer.getInteger(Wertereihe(i).get(6)));
-            System.out.println(Wertereihe(i).get(2) + " Verbrauch: " + Wertereihe(i).get(6));
-        }*/
-
-        mindata.forEach(item->{
-            String[] str = item.split(";");
-            List<String> values = Arrays.asList(str);
-            int verbrauch;
-            try {
-                verbrauch = Integer.parseInt(values.get(6));
-            }
-            catch (NumberFormatException e)
-            {
-                verbrauch = 0;
-            }
-            Verbrauch.put(DateConverter.Timestamp(values.get(2)), verbrauch);
-            //System.out.println(DateConverter.Timestamp(values.get(2)) + " Verbrauch: " + verbrauch);
-        });
-        return Verbrauch;
-    }
 
     public static List<String> Wertereihe(int pos, String path) throws IOException{
         List<String> mindata = Reader.mindata(path);
@@ -99,23 +27,40 @@ public class Values {
         mindata.forEach(item->{
             String[] str = item.split(";");
             List<String> values = Arrays.asList(str);
-            int verbrauch;
-            try {
-                verbrauch = Integer.parseInt(values.get(6));
-            }
-            catch (NumberFormatException e)
-            {
-                verbrauch = 0;
-            }
+
+            //intitialize variables
+            int verbrauchw = 0;
+            int verbrauchkwh = 0;
+            int leistungw = 0;
+            int ertragkwh = 0;
+            int energieverbrauchw = 0;
+
+            List<Integer> valueseach = new ArrayList<>();
+
+            String timestamp = DateConverter.Timestamp(values.get(2));
+
+            //getting values
+            verbrauchw = Integer.parseInt(values.get(6));
+            verbrauchkwh = Integer.parseInt(values.get(10));
+            leistungw = Integer.parseInt(values.get(17));
+            ertragkwh = Integer.parseInt(values.get(23));
+            energieverbrauchw = Integer.parseInt(values.get(44));
+
+
+            //writing values to List
+            valueseach.add(verbrauchw);
+            valueseach.add(verbrauchkwh);
+            valueseach.add(leistungw);
+            valueseach.add(ertragkwh);
+            valueseach.add(energieverbrauchw);
+
+
+            //Writing List to Map
+            Data.put(timestamp, valueseach);
 
             //System.out.println(DateConverter.Timestamp(values.get(2)) + " Verbrauch: " + verbrauch);
         });
 
-        return null;
+        return Data;
     }
-
-
-
-
-
 }

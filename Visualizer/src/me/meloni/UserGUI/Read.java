@@ -40,12 +40,12 @@ public class Read implements ActionListener {
         j.setFileFilter(new FileFilter() {
             @Override
             public boolean accept(File f) {
-                return false;
+                return f.getName().contains(".dat") || f.isDirectory();
             }
 
             @Override
             public String getDescription() {
-                return "*.dat";
+                return "Data files (*.dat)";
             }
         });
         int r = j.showOpenDialog(null);
@@ -64,12 +64,12 @@ public class Read implements ActionListener {
             j2.setFileFilter(new FileFilter() {
                 @Override
                 public boolean accept(File f) {
-                    return f.canWrite() || f.getName().contains(".solarlog");
+                    return f.canWrite() & f.getName().contains(".solarlog") || f.isDirectory();
                 }
 
                 @Override
                 public String getDescription() {
-                    return "*.solarlog";
+                    return "Solarlog files (*.solarlog)";
                 }
             });
             int r2 = j2.showSaveDialog(null);
@@ -77,6 +77,9 @@ public class Read implements ActionListener {
             if (r2 == JFileChooser.APPROVE_OPTION){
                 String writepath = j2.getSelectedFile().getPath();
 
+                if(!writepath.contains(".solarlog")){
+                    writepath = writepath + ".solarlog";
+                }
                 l.setText("Schreibe nach " + writepath);
                 Write.write(writepath, readpath);
             } else {
