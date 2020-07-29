@@ -57,6 +57,10 @@ public class DateConverter {
 
 
 
-
+    public static String day(String daystamp){
+        //From YEAR/MONTH/DAY
+        //To DAY.MONTH.YEAR
+        return daystamp.substring(4,6) + "." + daystamp.substring(2,4) + "." + daystamp.substring(0,2);
+    }
 
 }

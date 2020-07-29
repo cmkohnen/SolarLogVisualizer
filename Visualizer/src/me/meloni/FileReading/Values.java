@@ -23,10 +23,17 @@ public class Values {
         return Arrays.asList(str);
     }
 
-    public static Map<String, List<Integer>> DataMap(String path) throws IOException {
-        List<String> mindata = Reader.mindata(path);
+    public static Map<String, List<Integer>> DataMap(List<String> paths) throws IOException {
         Map<String, List<Integer>> Data = new HashMap<>();
-        mindata.forEach(item->{
+        paths.forEach(path->{
+            List<String> mindata = null;
+            try {
+                mindata = Reader.mindata(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert mindata != null;
+            mindata.forEach(item->{
             String[] str = item.split(";");
             List<String> values = Arrays.asList(str);
 
@@ -62,7 +69,7 @@ public class Values {
 
             //System.out.println(DateConverter.Timestamp(values.get(2)) + " Verbrauch: " + verbrauch);
         });
-
+        });
         return Data;
     }
 }

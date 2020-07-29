@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Write {
-    public static void write(String writepath, String readpath) throws IOException {
-        Map<String, List<Integer>> fileObj = Values.DataMap(readpath);
+    public static void write(String writepath, List<String> readpaths) throws IOException {
+        Map<String, List<Integer>> fileObj = Values.DataMap(readpaths);
 
         //Writing FileInfo
         List<Integer> version = new ArrayList<>();

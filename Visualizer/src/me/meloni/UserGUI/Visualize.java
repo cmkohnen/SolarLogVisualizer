@@ -35,7 +35,7 @@ public class Visualize {
         {
             // set the label to the path of the selected file
             String readpath = j.getSelectedFile().getPath();
-            System.out.println(Read.Data(readpath));
+            //System.out.println(Read.Data(readpath));
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     try {
