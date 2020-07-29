@@ -13,7 +13,7 @@ public class Visualizer {
     public static final String version = "0.0.5";
     public static boolean debug = false;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         if(Arrays.toString(args).contains("-debug")){
             debug = true;
         }
