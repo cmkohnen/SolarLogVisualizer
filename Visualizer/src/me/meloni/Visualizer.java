@@ -9,7 +9,8 @@ import java.util.Arrays;
 
 public class Visualizer {
 
-    public static final int version = 3;
+    public static final int fileversion = 1;
+    public static final String version = "0.0.5";
     public static boolean debug = false;
 
     public static void main(String[] args) throws IOException {

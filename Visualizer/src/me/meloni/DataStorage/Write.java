@@ -17,7 +17,7 @@ public class Write {
 
         //Writing FileInfo
         List<Integer> version = new ArrayList<>();
-        version.add(Visualizer.version);
+        version.add(Visualizer.fileversion);
         fileObj.put("version", version);
 
 
