@@ -2,9 +2,6 @@ package me.meloni.UserGUI;
 
 import me.meloni.Tools.Nord;
 import me.meloni.UserGUI.Graphtemplates.Daily;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
@@ -51,7 +48,7 @@ public class Visualize {
         dp.setBounds(10, 250, 270, 400);
         dp.setBackground(Nord.n2());
 
-        
+
 
 
 
