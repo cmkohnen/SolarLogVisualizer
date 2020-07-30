@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -161,7 +160,7 @@ public class Import {
         JPanel text = new JPanel();
         text.setBackground(Nord.n2());
 
-        frame.add(MainWindow.header());
+        frame.add(MainWindow.header(1000));
 
         JScrollPane p = new JScrollPane(l);
         p.setBounds(100,140,300,265);

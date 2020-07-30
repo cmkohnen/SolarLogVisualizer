@@ -21,7 +21,7 @@ public class MainWindow extends JFrame {
 
     }
 
-    public static JPanel header(){
+    public static JPanel header(Integer width){
         JPanel header = new JPanel();
         header.setBackground(new Color(46, 52, 64, 255));
         header.setBounds(0, 0,width,40);
@@ -96,7 +96,10 @@ public class MainWindow extends JFrame {
 
 
             frame.add(body);
-            frame.add(header());
+            frame.add(header(1000));
+
+
+
             frame.setSize(width, height);
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
