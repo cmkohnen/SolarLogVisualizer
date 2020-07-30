@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Import {
     private static List<String> paths = new ArrayList<>();
@@ -38,6 +40,28 @@ public class Import {
         adddir.add(adddirlabel);
         adddir.setBounds(100,410,300,30);
         adddir.setBackground(Nord.n10());
+        adddir.addActionListener(e ->{
+            JFileChooser j = new JFileChooser(path);
+            j.setDialogTitle("Import");
+            j.setAcceptAllFileFilterUsed(false);
+            j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            if(j.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                List<File> addpaths = Arrays.asList(Objects.requireNonNull(j.getSelectedFile().listFiles()));
+                path = j.getSelectedFile().getParentFile();
+                addpaths.forEach(f->{
+                    if(f.getName().contains(".dat")){
+                        try {
+                            if(Validate.validate(f.getPath())){
+                                addpath(f.getPath());
+                                //System.out.println(f);
+                            }
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
 
 
 
@@ -77,7 +101,7 @@ public class Import {
 
             // if the user selects a file
             if (r == JFileChooser.APPROVE_OPTION){
-                addpath(j);
+                addpath(j.getSelectedFile().getPath());
             }
 
         });
@@ -164,21 +188,21 @@ public class Import {
 
 
     }
-    private static void addpath(JFileChooser j){
-        if(!paths.contains(j.getSelectedFile().getPath())){
-            paths.add(j.getSelectedFile().getPath());
+    private static void addpath(String spath){
+        if(!paths.contains(spath)){
+            paths.add(spath);
         }
-        System.out.println(paths);
+        //System.out.println(paths);
         l.removeAll();
-        for (String path : paths) {
+        for (String p : paths) {
             JLabel m = new JLabel();
-            m.setText(path);
+            m.setText(p);
             m.setForeground(Nord.n7());
             m.setFont(new Font("Courier", Font.PLAIN, 18));
             l.add(m);
         }
 
-        path = j.getSelectedFile().getParentFile();
+        path = new File(spath).getParentFile();
         l.setVisible(false);
         l.setVisible(true);
         next.setEnabled(true);
