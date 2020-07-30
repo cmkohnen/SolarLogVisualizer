@@ -1,5 +1,6 @@
 package me.meloni.UserGUI;
 
+import me.meloni.FileReading.Validate;
 import me.meloni.Tools.Nord;
 
 import javax.swing.*;
@@ -29,6 +30,17 @@ public class Import {
         l.setBackground(new Color(59, 66, 82));
 
 
+        JLabel adddirlabel = new JLabel();
+        adddirlabel.setFont(new Font("Courier", Font.PLAIN, 20));
+        adddirlabel.setForeground(Nord.n6());
+        adddirlabel.setText("Add Directory");
+        JButton adddir = new JButton();
+        adddir.add(adddirlabel);
+        adddir.setBounds(100,410,300,30);
+        adddir.setBackground(Nord.n10());
+
+
+
         JLabel addmorelabel = new JLabel();
         addmorelabel.setFont(new Font("Courier", Font.PLAIN, 20));
         addmorelabel.setForeground(Nord.n6());
@@ -42,10 +54,18 @@ public class Import {
 
             // invoke the showsSaveDialog function to show the save dialog
             j.setDialogTitle("Import");
+            j.setAcceptAllFileFilterUsed(false);
             j.setFileFilter(new FileFilter() {
                 @Override
                 public boolean accept(File f) {
-                    return f.getName().contains(".dat") || f.isDirectory();
+                    if(f.isDirectory()) {return true;}
+                    if(f.getName().contains(".dat")){
+                        try {
+                            return Validate.validate(f.getPath());
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    } return false;
                 }
 
                 @Override
@@ -120,7 +140,7 @@ public class Import {
         frame.add(MainWindow.header());
 
         JScrollPane p = new JScrollPane(l);
-        p.setBounds(100,140,300,300);
+        p.setBounds(100,140,300,265);
 
         JScrollBar s1 = new JScrollBar();
         s1.setBackground(Nord.n1());
@@ -131,6 +151,7 @@ public class Import {
         frame.add(next);
         frame.add(home);
         frame.add(t);
+        frame.add(adddir);
 
         frame.add(text);
         frame.setBackground(new Color(76, 86, 106, 255));

@@ -23,7 +23,7 @@ public class Values {
         return Arrays.asList(str);
     }
 
-    public static Map<String, List<Integer>> DataMap(List<String> paths) throws IOException {
+    public static Map<String, List<Integer>> DataMap(List<String> paths) {
         Map<String, List<Integer>> Data = new HashMap<>();
         paths.forEach(path->{
             List<String> mindata = null;
