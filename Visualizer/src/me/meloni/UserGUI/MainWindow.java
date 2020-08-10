@@ -8,19 +8,39 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
+/**
+ * Initial Window
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.3
+ */
 public class MainWindow extends JFrame {
     private static final int width = 1000;
     private static final int height = 600;
 
     private static final JFrame frame = new JFrame("Visualizer - Home");
 
+    /**
+     * Enables the main window.
+     *
+     * @since 0.0.3
+     */
     public static void enableframe(){
         frame.setVisible(true);
     }
+    /**
+     * Disables the main window.
+     *
+     * @since 0.0.3
+     */
     public static void disableframe(){ frame.setVisible(false); }
-
+    /**
+     * Header used in windows.
+     *
+     * @since 0.0.3
+     */
     public static JPanel header(Integer width){
         JPanel header = new JPanel();
         header.setBackground(new Color(46, 52, 64, 255));
@@ -39,13 +59,14 @@ public class MainWindow extends JFrame {
 
         return header;
     }
-
+    /**
+     * Creates the main window.
+     *
+     * @since 0.0.3
+     */
          public static void create() {
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
 
 
             JPanel body = new JPanel();
@@ -84,16 +105,7 @@ public class MainWindow extends JFrame {
                 {
                     // set the label to the path of the selected file
                     String readpath = j.getSelectedFile().getPath();
-                    //System.out.println(Read.Data(readpath));
-                    SwingUtilities.invokeLater(() -> {
-                        try {
-                            Visualize.visualize(Read.Data(readpath));
-
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    });
+                    SwingUtilities.invokeLater(() -> Visualize.visualize(Read.Data(readpath)));
 
                     disableframe();
                 }
@@ -117,11 +129,8 @@ public class MainWindow extends JFrame {
              });
              frame.add(importer);
 
-
             frame.add(body);
             frame.add(header(1000));
-
-
 
             frame.setSize(width, height);
             frame.setResizable(false);

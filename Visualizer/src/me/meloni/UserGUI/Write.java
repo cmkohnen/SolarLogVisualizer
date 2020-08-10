@@ -1,14 +1,23 @@
 package me.meloni.UserGUI;
 
+import me.meloni.FileReading.Values;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Used to write data into ".solarlog"-files
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.1
+ */
 public class Write {
-    public Write(List<String> paths) throws IOException {
+    public Write(List<String> paths) {
         JFileChooser j2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         j2.setDialogTitle("Save");
@@ -31,16 +40,11 @@ public class Write {
             if(!writepath.contains(".solarlog")){
                 writepath = writepath + ".solarlog";
             }
-            me.meloni.DataStorage.Write.write(writepath, paths);
+            Map<String, List<Integer>> data = Values.DataMap(paths);
+            me.meloni.DataStorage.Write.write(writepath, data);
             MainWindow.enableframe();
         } else {
             new Import();
         }
-
-
-
-
-
-
     }
 }

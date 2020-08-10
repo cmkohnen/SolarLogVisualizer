@@ -1,14 +1,18 @@
 package me.meloni.Tools;
 
 import java.awt.*;
-
+/**
+ * Main Visualizer Class
+ *
+ * @author Nord-Theme
+ *
+ * @since 0.0.5
+ */
 public class Nord {
     public static Color n0(){
         return new Color(46, 52, 64);
     }
-    public static Color n1(){
-        return new Color(59, 66, 82);
-    }
+    public static Color n1(){ return new Color(59, 66, 82); }
     public static Color n2(){
         return new Color(67, 76, 94);
     }

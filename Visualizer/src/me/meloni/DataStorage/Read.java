@@ -1,16 +1,26 @@
 package me.meloni.DataStorage;
 
-import me.meloni.FileReading.Values;
-
-import java.io.*;
-import java.util.HashMap;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for reading the ".solarlog"-files. The Map-function Data(String path) represents the written data on the file specified in path.
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.2
+ */
 public class Read {
-    public static Map<String, List<Integer>> Data(String path) throws IOException {
-
-
+    /**
+     * represents the written data on the file specified in path.
+     *
+     * @since 0.0.2
+     */
+    public static Map<String, List<Integer>> Data(String path) {
         try {
             File file = new File(path);
             FileInputStream f = new FileInputStream(file);
@@ -24,6 +34,5 @@ public class Read {
             ioe.printStackTrace();
             return null;
         }
-
     }
 }

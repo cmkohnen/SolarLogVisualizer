@@ -7,15 +7,25 @@ import me.meloni.UserGUI.Graphtemplates.Daily;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for visualizing the data provided.
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.1
+ */
 public class Visualize {
 
-
-    public static void visualize(Map<String, List<Integer>> data) throws IOException {
+    /**
+     * Visualizes given datamap.
+     *
+     * @since 0.0.5
+     */
+    public static void visualize(Map<String, List<Integer>> data) {
         List<JComponent> l = new ArrayList<>();
 
         JFrame f = new JFrame();
@@ -52,10 +62,7 @@ public class Visualize {
         picker.setBackground(Nord.n7());
         picker.addDateChangeListener(dateChangeEvent -> {
             String daystamp = DateConverter.dayfrompicker(dateChangeEvent.getNewDate().toString());
-           // System.out.println(daystamp);
-          //  System.out.println(data.get(daystamp + "000000"));
             if(data.containsKey(daystamp + "000000")){
-                //System.out.println("hä?");
                 List<String> timestamps = DateConverter.Timestampsperday(daystamp);
 
                 List<List<Double>> graphdata = new ArrayList<>();
@@ -89,9 +96,7 @@ public class Visualize {
                 f.setTitle("Visualize - "+DateConverter.day(daystamp));
                 l.add(cmp);
                 f.add(cmp);
-                //System.out.println(daystamp);
             } else {
-                //System.out.println("nö");
                 if(!(dateChangeEvent.getOldDate() == null)){
                     picker.setDate(dateChangeEvent.getOldDate());
                 }
@@ -112,12 +117,11 @@ public class Visualize {
         typeselectdescription.setBackground(Nord.n2());
         typeselectdescription.setEditable(false);
 
-        JComboBox viewtypeselectorbox = new JComboBox(types);
+        JComboBox<String> viewtypeselectorbox = new JComboBox<>(types);
         viewtypeselectorbox.setSelectedIndex(0);
         viewtypeselectorbox.setBounds(20,175,250,25);
         viewtypeselectorbox.addActionListener(e->{
-            JComboBox cb = (JComboBox)e.getSource();
-            String str = (String)cb.getSelectedItem();
+            String str = (String) ((JComboBox<String>)e.getSource()).getSelectedItem();
 
             assert str != null;
             if(str.equals("")){
@@ -127,14 +131,12 @@ public class Visualize {
                         });
                 dateselectordescription.setVisible(false);
                 dateselectorbackground.setVisible(false);
-                System.out.println("Test");
             }
 
             if(str.equals("Day view")){
                 picker.setVisible(true);
                 dateselectordescription.setVisible(true);
                 dateselectorbackground.setVisible(true);
-                System.out.println("Test2");
             }
 
         });

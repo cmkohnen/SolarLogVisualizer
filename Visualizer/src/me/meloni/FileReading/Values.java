@@ -4,7 +4,13 @@ import me.meloni.Tools.DateConverter;
 
 import java.io.IOException;
 import java.util.*;
-
+/**
+ * Class for converting backup files into usable data.
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.1
+ */
 public class Values {
 
     /*
@@ -16,13 +22,13 @@ public class Values {
         Eigenverbrauch W: 44
      */
 
-    public static List<String> Wertereihe(int pos, String path) throws IOException{
-        List<String> mindata = Reader.mindata(path);
-        String content = mindata.get(pos - 1);
-        String[] str = content.split(";");
-        return Arrays.asList(str);
-    }
 
+
+    /**
+     * Represents a Map of data based on a list of filepaths. This method actually converts data from backup files into usable and more lightweight data.
+     *
+     * @since 0.0.1
+     */
     public static Map<String, List<Integer>> DataMap(List<String> paths) {
         Map<String, List<Integer>> Data = new HashMap<>();
         paths.forEach(path->{
@@ -38,11 +44,11 @@ public class Values {
             List<String> values = Arrays.asList(str);
 
             //intitialize variables
-            int verbrauchw = 0;
-            int verbrauchkwh = 0;
-            int leistungw = 0;
-            int ertragkwh = 0;
-            int energieverbrauchw = 0;
+            int verbrauchw;
+            int verbrauchkwh;
+            int leistungw;
+            int ertragkwh;
+            int energieverbrauchw;
 
             List<Integer> valueseach = new ArrayList<>();
 
@@ -66,8 +72,6 @@ public class Values {
 
             //Writing List to Map
             Data.put(timestamp, valueseach);
-
-            //System.out.println(DateConverter.Timestamp(values.get(2)) + " Verbrauch: " + verbrauch);
         });
         });
         return Data;

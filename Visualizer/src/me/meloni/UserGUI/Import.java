@@ -14,20 +14,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class for importing data. Creates new window which guides you throu the steps of importing data.
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.0.3
+ */
 public class Import {
-    private static List<String> paths = new ArrayList<>();
-    private static JPanel l = new JPanel();
-    private static JButton next = new JButton();
+    private static final List<String> paths = new ArrayList<>();
+    private static final JPanel l = new JPanel();
+    private static final JButton next = new JButton();
     private static File path = FileSystemView.getFileSystemView().getHomeDirectory();
     public Import(){
-
-
 
         JFrame frame = new JFrame("Visualizer - Import");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        //l.setBounds(160,140,200,300);
         l.setBackground(new Color(59, 66, 82));
 
 
@@ -52,7 +55,6 @@ public class Import {
                         try {
                             if(Validate.validate(f.getPath())){
                                 addpath(f.getPath());
-                                //System.out.println(f);
                             }
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
@@ -61,8 +63,6 @@ public class Import {
                 });
             }
         });
-
-
 
         JLabel addmorelabel = new JLabel();
         addmorelabel.setFont(new Font("Courier", Font.PLAIN, 20));
@@ -116,7 +116,6 @@ public class Import {
         l.setLayout(new BoxLayout(l, BoxLayout.Y_AXIS));
 
 
-
         JLabel nextlabel = new JLabel();
         nextlabel.setFont(new Font("Courier", Font.PLAIN, 20));
         nextlabel.setForeground(Nord.n6());
@@ -128,11 +127,7 @@ public class Import {
         next.addActionListener(e->{
             if(next.isEnabled()){
                 frame.setVisible(false);
-                try {
-                    new Write(paths);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+                new Write(paths);
             }
         });
 
@@ -191,7 +186,6 @@ public class Import {
         if(!paths.contains(spath)){
             paths.add(spath);
         }
-        //System.out.println(paths);
         l.removeAll();
         for (String p : paths) {
             JLabel m = new JLabel();

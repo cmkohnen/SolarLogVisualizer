@@ -5,9 +5,15 @@ import me.meloni.Tools.Nord;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Graph Panel displaying daily graphs
+ *
+ * @author ChaosMelone9
+ *
+ * @since 0.1.1
+ */
 public class Daily extends JPanel {
     private final Color gridColor = Nord.n2();
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
@@ -148,7 +154,6 @@ public class Daily extends JPanel {
             int x2 = Reihe3.get(i + 1).x;
             int y2 = Reihe3.get(i + 1).y;
             g2.drawLine(x1, y1, x2, y2);
-            //g2.drawLine(x1,y1,x1,getHeight() - padding - labelPadding);
         }
         g2.setColor(Nord.n8());
         for (int i = 0; i < Reihe4.size() - 1; i++) {
