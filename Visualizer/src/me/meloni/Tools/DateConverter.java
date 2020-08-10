@@ -55,7 +55,11 @@ public class DateConverter {
         return list;
     }
 
-
+    public static String dayfrompicker(String day){
+        //From YEAR-MONTH-Day
+        //To DAY/MONTH/YEAR
+        return day.substring(2,4) + day.substring(5,7) + day.substring(8,10);
+    }
 
     public static String day(String daystamp){
         //From YEAR/MONTH/DAY

@@ -1,25 +1,25 @@
 package me.meloni.UserGUI;
 
+import me.meloni.DataStorage.Read;
 import me.meloni.Visualizer;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 public class MainWindow extends JFrame {
     private static final int width = 1000;
     private static final int height = 600;
 
-    private static JFrame frame = new JFrame("Visualizer - Home");
+    private static final JFrame frame = new JFrame("Visualizer - Home");
 
     public static void enableframe(){
         frame.setVisible(true);
     }
-    public static void disableframe(){
-
-    }
+    public static void disableframe(){ frame.setVisible(false); }
 
     public static JPanel header(Integer width){
         JPanel header = new JPanel();
@@ -61,11 +61,44 @@ public class MainWindow extends JFrame {
             visualize.setBounds(200, 140, 600, 100);
             visualize.setBackground(new Color(143, 188, 187, 255));
             visualize.addActionListener(e -> {
-                try {
-                    Visualize.visualize();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+                // invoke the showsSaveDialog function to show the save dialog
+                j.setDialogTitle("Import");
+                j.setFileFilter(new FileFilter() {
+                    @Override
+                    public boolean accept(File f) {
+                        return f.getName().contains(".solarlog") || f.isDirectory();
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "Solarlog files (*.solarlog)";
+                    }
+                });
+                int r = j.showOpenDialog(null);
+
+                // if the user selects a file
+                if (r == JFileChooser.APPROVE_OPTION)
+
+                {
+                    // set the label to the path of the selected file
+                    String readpath = j.getSelectedFile().getPath();
+                    //System.out.println(Read.Data(readpath));
+                    SwingUtilities.invokeLater(() -> {
+                        try {
+                            Visualize.visualize(Read.Data(readpath));
+
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    });
+
+                    disableframe();
                 }
+
+
             });
             frame.add(visualize);
 
@@ -79,18 +112,8 @@ public class MainWindow extends JFrame {
              importer.setBounds(200, 320, 600, 100);
              importer.setBackground(new Color(94, 129, 172, 255));
              importer.addActionListener(e -> {
-
-
                     frame.setVisible(false);
                     new Import();
-
-                 /*try {
-                     Read.read();
-                 } catch (IOException ioException) {
-                     ioException.printStackTrace();
-                 }
-
-                  */
              });
              frame.add(importer);
 
