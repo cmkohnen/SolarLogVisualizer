@@ -1,10 +1,14 @@
 package me.meloni.UserGUI.Graphtemplates;
 
 import me.meloni.Tools.Nord;
+import me.meloni.UserGUI.Visualize;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,6 +26,11 @@ public class Daily extends JPanel {
     public Daily(List<List<Double>> scores) {
         this.scores = scores;
     }
+    static boolean touchesmouse =false;
+
+
+    static int MouseX = 0;
+    static int MouseY = 0;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -31,6 +40,7 @@ public class Daily extends JPanel {
 
         int padding = 25;
         int labelPadding = 25;
+        int valuepadding = 10;
         int sidespacing = 300;
         double xScale = ((double) getWidth() - sidespacing - (2 * padding) - labelPadding - labelPadding) / (scores.size() - 1);
         int topspacing = 40;
@@ -173,6 +183,57 @@ public class Daily extends JPanel {
         }
 
         g2.setStroke(oldStroke);
+        g2.setColor(Nord.n1());
+
+        touchesmouse = MouseX >= sidespacing + labelPadding + padding & MouseX <= getWidth() - labelPadding - padding & MouseY >= topspacing + padding & MouseY <= getHeight() - padding - labelPadding;
+
+
+        if(touchesmouse){
+            g2.fillRect(sidespacing + padding + labelPadding, topspacing + padding, 200, 200);
+
+
+            double ExactMouseXValue = (MouseX - sidespacing - padding -labelPadding) / xScale;
+
+            List<String> MouseValues = new ArrayList<>();
+            MouseValues.add(scores.get((int)ExactMouseXValue).get(0).toString());
+            MouseValues.add(scores.get((int)ExactMouseXValue).get(1).toString());
+            MouseValues.add(scores.get((int)ExactMouseXValue).get(2).toString());
+            MouseValues.add(scores.get((int)ExactMouseXValue).get(3).toString());
+            MouseValues.add(scores.get((int)ExactMouseXValue).get(4).toString());
+
+
+            g2.setColor(Nord.n5());
+            g2.drawString("Values at",sidespacing + padding + labelPadding + valuepadding, topspacing + padding + valuepadding);
+            g2.drawString("verbrauchw: " + scores.get((int)ExactMouseXValue).get(0).toString(),sidespacing + padding + labelPadding + valuepadding, topspacing + padding + (valuepadding * 2));
+            g2.drawString("verbrauchkwh: " + scores.get((int)ExactMouseXValue).get(1).toString(),sidespacing + padding + labelPadding + valuepadding, topspacing + padding + (valuepadding * 2) * 2);
+            g2.drawString("leistungw: " + scores.get((int)ExactMouseXValue).get(2).toString(),sidespacing + padding + labelPadding + valuepadding, topspacing + padding + (valuepadding * 2) * 3);
+            g2.drawString("ertragkwh: " + scores.get((int)ExactMouseXValue).get(3).toString(),sidespacing + padding + labelPadding + valuepadding, topspacing + padding + (valuepadding * 2) * 4);
+            g2.drawString("energieverbrauchw: " + scores.get((int)ExactMouseXValue).get(4).toString(),sidespacing + padding + labelPadding + valuepadding, topspacing + padding + (valuepadding * 2) * 5);
+
+            Visualize.showvalues(touchesmouse, MouseValues);
+
+        }
+
+
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                MouseX = e.getX();
+                MouseY = e.getY();
+
+
+                Visualize.repaint();
+
+
+            }
+        });
+
     }
 
     private double getMinScore() {
@@ -201,5 +262,6 @@ public class Daily extends JPanel {
         }
         return maxScore;
     }
+
 
 }

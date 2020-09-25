@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/LGoodDatePicker-10.4.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../.Dependencies/LGoodDatePicker-11.0.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
