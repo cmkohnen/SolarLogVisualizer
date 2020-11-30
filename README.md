@@ -11,3 +11,8 @@ You are also able to visualize (just) one graph based on a day in the Format YEA
 
 
 If you would like to help or add anything you would find necessary feel free to open a pull request or contact me. You can also suggest features in the comment section.
+
+
+
+### Add the SolarLogAPI:
+`mvn install:install-file -Dfile=SolarLogAPI-2.0.0.jar -DgroupId=me.meloni -DartifactId=SolarLogAPI -Dversion=2.0.0 -Dpackaging=jar`
