@@ -1,16 +1,22 @@
 package me.meloni.SolarLogVisualizer.UI;
 
 import Handling.SolarMap;
+import Interface.BasicUI.BasicSolarMapCustomizer;
 import Interface.BasicUI.GraphCustomizer;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Visualizer extends JFrame {
+    private SolarMap solarMap;
+    private JPanel graph;
+    private final GridBagConstraints c = new GridBagConstraints();
     public Visualizer() {
         super("Visualization");
+        this.solarMap = new SolarMap();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
+        getSolarMapAsk();
         setupComponents();
         setLocationRelativeTo(null);
         pack();
@@ -19,7 +25,6 @@ public class Visualizer extends JFrame {
     }
 
     public void setupComponents() {
-        GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
 
         JPanel header = new JPanel();
@@ -31,20 +36,50 @@ public class Visualizer extends JFrame {
         c.gridy = 0;
         add(header, c);
 
-        JTabbedPane options = new Options();
-        options.setBackground(new Color(0,255,0));
+        Options options = new Options();
+        //options.setBackground(new Color(0,255,0));
         c.weighty = 1;
-        c.ipadx = 250;
+        c.ipadx = 120;
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 1;
         add(options, c);
 
-        JPanel graph = new JPanel();
-        graph.setBackground(new Color(0,0,255));
+        this.graph = new JPanel();
+        //graph.setBackground(new Color(0,0,255));
         c.weightx = 0.8;
         c.gridx = 1;
         c.gridy = 1;
         add(graph, c);
+
+        options.initialize(this);
     }
+
+    private void getSolarMapAsk() {
+        this.solarMap = BasicSolarMapCustomizer.solarMap();
+    }
+
+    public JPanel getGraph() {
+        return graph;
+    }
+
+    public SolarMap getSolarMap() {
+        return solarMap;
+    }
+
+    public void setGraph(JPanel graph) {
+        remove(this.graph);
+        this.graph = graph;
+        c.weightx = 0.8;
+        c.gridx = 1;
+        c.gridy = 1;
+        add(graph, c);
+        repaint();
+        setVisible(true);
+    }
+
+    public void setDate(String date) {
+        setTitle("Visualize - " + date);
+    }
+
 }
