@@ -2,33 +2,31 @@ package me.meloni.SolarLogVisualizer.UI;
 
 import Handling.SolarMap;
 import Interface.BasicUI.BasicSolarMapCustomizer;
-import Interface.BasicUI.GraphCustomizer;
+import me.meloni.SolarLogVisualizer.Config.Colors;
+import me.meloni.SolarLogVisualizer.UI.Components.Header;
+import me.meloni.SolarLogVisualizer.UI.Components.Options;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Visualizer extends JFrame {
+public class Visualizer extends JPanel {
+    MainWindow instance;
     private SolarMap solarMap;
     private JPanel graph;
     private final GridBagConstraints c = new GridBagConstraints();
-    public Visualizer() {
-        super("Visualization");
+    public Visualizer(MainWindow mainWindow) {
+        this.instance = mainWindow;
         this.solarMap = new SolarMap();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
-        getSolarMapAsk();
         setupComponents();
-        setLocationRelativeTo(null);
-        pack();
-        setSize(1000,800);
-        setVisible(true);
+        setBackground(Colors.backgroundColor);
     }
 
     public void setupComponents() {
         c.fill = GridBagConstraints.BOTH;
 
-        JPanel header = new JPanel();
-        header.setBackground(new Color(255,0,0));
+        JPanel header = new Header(this);
+        //header.setBackground(new Color(255,0,0));
         c.weighty = 0;
         c.ipady = 40;
         c.gridx = 0;
@@ -46,7 +44,7 @@ public class Visualizer extends JFrame {
         add(options, c);
 
         this.graph = new JPanel();
-        //graph.setBackground(new Color(0,0,255));
+        graph.setBackground(Colors.backgroundColor);
         c.weightx = 0.8;
         c.gridx = 1;
         c.gridy = 1;
@@ -67,19 +65,27 @@ public class Visualizer extends JFrame {
         return solarMap;
     }
 
-    public void setGraph(JPanel graph) {
+    public void addToSolarMap(SolarMap solarMap) {
+        this.solarMap.addFromSolarMap(solarMap);
+    }
+
+    public void setGraph(JPanel newGraph) {
         remove(this.graph);
-        this.graph = graph;
+        this.graph = newGraph;
         c.weightx = 0.8;
         c.gridx = 1;
         c.gridy = 1;
         add(graph, c);
         repaint();
+        instance.remove(this);
+        instance.add(this);
+        instance.repaint();
+        instance.setVisible(true);
         setVisible(true);
     }
 
     public void setDate(String date) {
-        setTitle("Visualize - " + date);
+        instance.setTitle("Visualize - " + date);
     }
 
 }
