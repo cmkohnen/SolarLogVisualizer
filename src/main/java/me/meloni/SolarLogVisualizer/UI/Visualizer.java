@@ -1,7 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI;
 
-import Handling.SolarMap;
-import Interface.BasicUI.BasicSolarMapCustomizer;
+import me.meloni.SolarLogAPI.Handling.SolarMap;
+import me.meloni.SolarLogAPI.Interface.BasicUI.BasicSolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Components.Header;
 import me.meloni.SolarLogVisualizer.UI.Components.Options;

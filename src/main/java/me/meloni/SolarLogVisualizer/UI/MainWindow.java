@@ -1,11 +1,9 @@
 package me.meloni.SolarLogVisualizer.UI;
 
-import Handling.SolarMap;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.Config.Values;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 

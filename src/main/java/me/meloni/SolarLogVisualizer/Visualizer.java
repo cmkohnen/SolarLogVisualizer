@@ -1,6 +1,6 @@
 package me.meloni.SolarLogVisualizer;
 
-import Interface.BasicUI.BasicSolarMapCustomizer;
+import me.meloni.SolarLogAPI.Interface.BasicUI.BasicSolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.UI.MainWindow;
 
 import javax.swing.*;

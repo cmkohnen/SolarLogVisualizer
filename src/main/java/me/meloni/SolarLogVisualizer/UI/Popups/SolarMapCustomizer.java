@@ -1,7 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI.Popups;
 
-import FileInteraction.GetFile;
-import Handling.SolarMap;
+import me.meloni.SolarLogAPI.FileInteraction.GetFile;
+import me.meloni.SolarLogAPI.Handling.SolarMap;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;

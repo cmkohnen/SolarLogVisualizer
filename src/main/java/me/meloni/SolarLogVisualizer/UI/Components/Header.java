@@ -1,7 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import FileInteraction.GetFile;
-import FileInteraction.WirteFiles.WriteFileObject;
+import me.meloni.SolarLogAPI.FileInteraction.GetFile;
+import me.meloni.SolarLogAPI.FileInteraction.WriteFiles.WriteFileObject;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Popups.SolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
@@ -49,7 +49,7 @@ public class Header extends JPanel {
         button2.add(button2Label);
         button2.addActionListener(actionEvent -> {
             try {
-                WriteFileObject.write(GetFile.ChosenSafeLocation(),instance.getSolarMap());
+                WriteFileObject.write(GetFile.ChosenSafeLocation(),instance.getSolarMap().getFileObject());
             } catch (IOException e) {
                 e.printStackTrace();
             }

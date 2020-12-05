@@ -4,8 +4,6 @@ import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 
 public class Options extends JTabbedPane {
     public void initialize(Visualizer instance) {

@@ -1,8 +1,8 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import Handling.SolarMap;
-import Interface.DatePicker;
-import TransformUtilities.DataConversion.GetStartOf;
+import me.meloni.SolarLogAPI.Handling.SolarMap;
+import me.meloni.SolarLogAPI.Interface.DatePicker;
+import me.meloni.SolarLogAPI.DataConversion.GetStartOf;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class DayView extends JPanel {
-    private Interface.Graph.DayView cmp;
+    private me.meloni.SolarLogAPI.Interface.Graph.DayView cmp;
     private final Visualizer instance;
     public DayView(Visualizer instance) {
         this.instance = instance;
@@ -26,7 +26,7 @@ public class DayView extends JPanel {
             if(solarMap.includesDay(event.getNewDate())){
                 try {
                     Date date = GetStartOf.day(event.getNewDate());
-                    cmp = new Interface.Graph.DayView(solarMap.getDayGraphData(date));
+                    cmp = new me.meloni.SolarLogAPI.Interface.Graph.DayView(solarMap.getDayGraphData(date));
                     paintComponent();
                     instance.setDate(date.toString());
                 } catch (ParseException e) {

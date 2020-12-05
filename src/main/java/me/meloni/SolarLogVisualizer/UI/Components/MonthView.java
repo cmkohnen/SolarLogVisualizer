@@ -1,8 +1,8 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import Handling.SolarMap;
-import Interface.DatePicker;
-import TransformUtilities.DataConversion.GetStartOf;
+import me.meloni.SolarLogAPI.Handling.SolarMap;
+import me.meloni.SolarLogAPI.Interface.DatePicker;
+import me.meloni.SolarLogAPI.DataConversion.GetStartOf;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
@@ -11,7 +11,7 @@ import java.awt.*;
 import java.text.ParseException;
 
 public class MonthView extends JPanel {
-    private Interface.Graph.MonthView cmp = null;
+    private me.meloni.SolarLogAPI.Interface.Graph.MonthView cmp = null;
     private final Visualizer instance;
 
     public MonthView(Visualizer instance) {
@@ -25,7 +25,7 @@ public class MonthView extends JPanel {
         picker.addDateChangeListener(event -> {
             if(solarMap.includesMonth(GetStartOf.yearMonth(event.getNewDate()))){
                 try {
-                    cmp = new Interface.Graph.MonthView(solarMap.getMonthData(GetStartOf.yearMonth(event.getNewDate())));
+                    cmp = new me.meloni.SolarLogAPI.Interface.Graph.MonthView(solarMap.getMonthData(GetStartOf.yearMonth(event.getNewDate())));
                     paintComponent();
                 } catch (ParseException e) {
                     e.printStackTrace();
