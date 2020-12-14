@@ -1,18 +1,13 @@
 # SolarLogVisualizer
 Hello Everyone!
 Thank you vor visiting my small little project.
+This project is my second attempt in designing a usable UI for my own [SolarLogAPI](https://github.com/ChaosMelone9/SolarLogAPI) and for semi-daily usage.
 
-This project (Java) is about visualizing your Data stored in the Solarlog-Backup files. As of right now the project is working, but lots of Work is still needed to be done. 
+Please do note that I heavily recommend to use InfluxDB in combination with Grafana as it is more powerfull and bugfree than this might ever be.
 
+If you would like to help or add anything you would find necessary feel free to open a pull request or contact me. You can also suggest features if you'd like.
 
+Please do note that I'm only part time developing, so I might prioritize other projects more likely.
 
-As of right now you can import as many Data files as you like (and your computer can handle) and save them into a special file, for more information read the wiki.
-You are also able to visualize (just) one graph based on a day in the Format YEAR/MONTH/DAY without the "/".
-
-
-If you would like to help or add anything you would find necessary feel free to open a pull request or contact me. You can also suggest features in the comment section.
-
-
-
-### Add the SolarLogAPI:
-`mvn install:install-file -Dfile=SolarLogAPI-2.0.0.jar -DgroupId=me.meloni -DartifactId=SolarLogAPI -Dversion=2.0.0 -Dpackaging=jar`
+### Setup
+If you haven't installed the SolarLogAPI into your local maven repository please run the `addAPI.sh` file and refresh maven.
