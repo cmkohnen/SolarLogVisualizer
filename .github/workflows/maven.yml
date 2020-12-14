@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Import SolarLogAPI
-      run: mvn install:install-file -Dfile=SolarLogAPI3.0.4.jar -DgroupId=me.meloni -DartifactId=SolarLogAPI -Dversion=3.0.4 -Dpackaging=jar
+      run: mvn install:install-file -Dfile=SolarLogAPI-3.0.4.jar -DgroupId=me.meloni -DartifactId=SolarLogAPI -Dversion=3.0.4 -Dpackaging=jar
     - name: Build with Maven
       run: mvn -B package --file pom.xml
