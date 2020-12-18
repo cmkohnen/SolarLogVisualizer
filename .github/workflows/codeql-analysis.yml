@@ -48,7 +48,7 @@ jobs:
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
           
     - name: Import SolarLogAPI
-      run: mvn install:install-file -Dfile=SolarLogAPI-3.0.4.jar -DgroupId=me.meloni -DartifactId=SolarLogAPI -Dversion=3.0.4 -Dpackaging=jar
+      run: chmod +x addAPI.sh && ./addAPI.sh
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
