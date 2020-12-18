@@ -1,7 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI.Popups;
 
 import me.meloni.SolarLogAPI.FileInteraction.GetFile;
-import me.meloni.SolarLogAPI.Handling.SolarMap;
+import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class SolarMapCustomizer {
 
         JButton addFile = new JButton("Add File");
         addFile.addActionListener(e -> {
-            File f = GetFile.ValidChosenDataFile();
+            File f = GetFile.validChosenDataFile();
             if (!(f == null) && f.exists()) {
                 try {
                     solarMap.addImportFromFile(f);
@@ -35,7 +35,7 @@ public class SolarMapCustomizer {
         JButton addDirectory = new JButton("Add from Folder");
         addDirectory.addActionListener(e -> {
             try {
-                java.util.List<File> files = GetFile.ChosenValidFilesInDirectory();
+                java.util.List<File> files = GetFile.chosenValidFilesInDirectory();
                 if (!(files == null)) {
                     solarMap.addImportFromFiles(files);
                     setVisible(false);
@@ -47,7 +47,7 @@ public class SolarMapCustomizer {
 
         JButton addTar = new JButton("Add from tar");
         addTar.addActionListener(e -> {
-            File f = GetFile.ChosenTarArchive();
+            File f = GetFile.chosenTarArchive();
             if (!(f == null) && f.exists()) {
                 try {
                     solarMap.addFromTar(f);
@@ -61,7 +61,7 @@ public class SolarMapCustomizer {
         JButton addTars = new JButton("Add from tars");
         addTars.addActionListener(e -> {
             try {
-                List<File> files = GetFile.ChosenTarsInDirectory();
+                List<File> files = GetFile.chosenTarsInDirectory();
                 if (!(files == null)) {
                     solarMap.addFromTars(files);
                     setVisible(false);
@@ -73,7 +73,7 @@ public class SolarMapCustomizer {
 
         JButton addDataFile = new JButton("Add from Data File");
         addDataFile.addActionListener(e -> {
-            File f = GetFile.ChosenReadLocation();
+            File f = GetFile.chosenReadLocation();
             if (!(f == null) && f.exists()) {
                 try {
                     solarMap.addFromDataFile(f);

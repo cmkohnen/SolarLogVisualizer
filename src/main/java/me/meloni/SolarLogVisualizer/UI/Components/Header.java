@@ -1,14 +1,12 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import me.meloni.SolarLogAPI.FileInteraction.GetFile;
-import me.meloni.SolarLogAPI.FileInteraction.WriteFiles.WriteFileObject;
+import me.meloni.SolarLogAPI.Interface.BasicUI.BasicSaveOptions;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Popups.SolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Header extends JPanel {
     Visualizer instance;
@@ -47,13 +45,7 @@ public class Header extends JPanel {
         button2Label.setFont(new Font("Courier", Font.PLAIN, 30));
         button2Label.setForeground(Colors.fontColor);
         button2.add(button2Label);
-        button2.addActionListener(actionEvent -> {
-            try {
-                WriteFileObject.write(GetFile.ChosenSafeLocation(),instance.getSolarMap().getFileObject());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        button2.addActionListener(actionEvent -> BasicSaveOptions.save(instance.getSolarMap()));
         add(button2, c);
 
     }

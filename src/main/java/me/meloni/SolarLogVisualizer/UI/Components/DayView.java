@@ -1,6 +1,6 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import me.meloni.SolarLogAPI.Handling.SolarMap;
+import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogAPI.Interface.DatePicker;
 import me.meloni.SolarLogAPI.DataConversion.GetStartOf;
 import me.meloni.SolarLogVisualizer.Config.Colors;
