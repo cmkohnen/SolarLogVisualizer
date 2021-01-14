@@ -22,10 +22,10 @@ public class SolarMapCustomizer {
 
         JButton addFile = new JButton("Add File");
         addFile.addActionListener(e -> {
-            File f = GetChosenFile.validChosenDataFile();
+            File f = GetChosenFile.chosenDatFile();
             if (!(f == null) && f.exists()) {
                 try {
-                    solarMap.addImportFromFile(f);
+                    solarMap.addFromDatFile(f);
                     setVisible(false);
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
@@ -36,9 +36,9 @@ public class SolarMapCustomizer {
         JButton addDirectory = new JButton("Add from Folder");
         addDirectory.addActionListener(e -> {
             try {
-                java.util.List<File> files = GetChosenFile.chosenValidFilesInDirectory();
+                List<File> files = GetChosenFile.chosenDatFilesInDirectory();
                 if (!(files == null)) {
-                    solarMap.addImportFromFiles(files);
+                    solarMap.addFromDatFiles(files);
                     setVisible(false);
                 }
             } catch (IOException | ParseException ioException) {
@@ -51,7 +51,7 @@ public class SolarMapCustomizer {
             File f = GetChosenFile.chosenTarArchive();
             if (!(f == null) && f.exists()) {
                 try {
-                    solarMap.addFromTar(f);
+                    solarMap.addFromTarArchive(f);
                     setVisible(false);
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -62,9 +62,9 @@ public class SolarMapCustomizer {
         JButton addTars = new JButton("Add from tars");
         addTars.addActionListener(e -> {
             try {
-                List<File> files = GetChosenFile.chosenTarsInDirectory();
+                List<File> files = GetChosenFile.chosenTarArchivesInDirectory();
                 if (!(files == null)) {
-                    solarMap.addFromTars(files);
+                    solarMap.addFromTarArchives(files);
                     setVisible(false);
                 }
             } catch (Exception exception) {
@@ -74,10 +74,10 @@ public class SolarMapCustomizer {
 
         JButton addDataFile = new JButton("Add from Data File");
         addDataFile.addActionListener(e -> {
-            File f = GetChosenFile.chosenReadLocation();
+            File f = GetChosenFile.chosenSolarLogFile();
             if (!(f == null) && f.exists()) {
                 try {
-                    solarMap.addFromDataFile(f);
+                    solarMap.addFromSolarLogFile(f);
                     setVisible(false);
                 } catch (IOException | ClassNotFoundException ioException) {
                     ioException.printStackTrace();
