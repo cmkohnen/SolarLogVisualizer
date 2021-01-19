@@ -16,6 +16,23 @@
             <groupId>me.meloni</groupId>
             <artifactId>SolarLogAPI</artifactId>
             <version>3.8.6</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.6</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+            <scope>compile</scope>
+            <optional>false</optional>
         </dependency>
 
         <dependency>

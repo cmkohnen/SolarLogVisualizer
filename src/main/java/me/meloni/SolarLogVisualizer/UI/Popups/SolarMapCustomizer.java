@@ -22,7 +22,7 @@ public class SolarMapCustomizer {
         JPanel buttons = new JPanel();
         frame.setLocationRelativeTo(instance);
 
-        JButton addFile = new JButton("Add File");
+        JButton addFile = new JButton("Add from Dat file");
         addFile.addActionListener(e -> {
             File f = GetChosenFile.chosenDatFile();
             if (!(f == null) && f.exists()) {
@@ -35,7 +35,7 @@ public class SolarMapCustomizer {
             }
         });
 
-        JButton addDirectory = new JButton("Add from Folder");
+        JButton addDirectory = new JButton("Add from Dat files");
         addDirectory.addActionListener(e -> {
             try {
                 List<File> files = GetChosenFile.chosenDatFilesInDirectory();
@@ -48,7 +48,7 @@ public class SolarMapCustomizer {
             }
         });
 
-        JButton addTar = new JButton("Add from tar");
+        JButton addTar = new JButton("Add from tar archive");
         addTar.addActionListener(e -> {
             File f = GetChosenFile.chosenTarArchive();
             if (!(f == null) && f.exists()) {
@@ -61,7 +61,7 @@ public class SolarMapCustomizer {
             }
         });
 
-        JButton addTars = new JButton("Add from tars");
+        JButton addTars = new JButton("Add from tar archives");
         addTars.addActionListener(e -> {
             try {
                 List<File> files = GetChosenFile.chosenTarArchivesInDirectory();
@@ -96,11 +96,26 @@ public class SolarMapCustomizer {
             }
         });
 
+        JButton addJSFiles = new JButton("Add from JS Files");
+        addJSFiles.addActionListener(e -> {
+            try {
+                List<File> files = GetChosenFile.chosenJSFilesInDirectory();
+                if (!(files == null)) {
+                    solarMap.addFromJSFiles(files);
+                    setVisible(false);
+                }
+            } catch (IOException | ParseException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
         buttons.add(addFile);
         buttons.add(addDirectory);
         buttons.add(addTar);
         buttons.add(addTars);
         buttons.add(addDataFile);
+        buttons.add(addFTPServer);
+        buttons.add(addJSFiles);
         frame.add(buttons);
         frame.setSize(200, 600);
         f = frame;
