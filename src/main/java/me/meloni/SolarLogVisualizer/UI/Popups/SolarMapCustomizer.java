@@ -1,6 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI.Popups;
 
 import me.meloni.SolarLogAPI.BasicGUI.GetChosenFile;
+import me.meloni.SolarLogAPI.BasicGUI.ImportFromFTP;
 import me.meloni.SolarLogAPI.FileInteraction.GetFile;
 import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
@@ -8,6 +9,7 @@ import me.meloni.SolarLogVisualizer.UI.Visualizer;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -82,6 +84,15 @@ public class SolarMapCustomizer {
                 } catch (IOException | ClassNotFoundException ioException) {
                     ioException.printStackTrace();
                 }
+            }
+        });
+
+        JButton addFTPServer = new JButton("Add from FTP Server");
+        addFTPServer.addActionListener(e -> {
+            try {
+                solarMap.addFromSolarMap(ImportFromFTP.importWithGUI());
+            } catch (ParseException | IOException | URISyntaxException Exception) {
+                Exception.printStackTrace();
             }
         });
 
