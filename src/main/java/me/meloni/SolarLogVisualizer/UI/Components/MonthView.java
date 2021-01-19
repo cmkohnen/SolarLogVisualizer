@@ -25,7 +25,7 @@ public class MonthView extends JPanel {
         picker.addDateChangeListener(event -> {
             if(solarMap.includesMonth(GetStartOf.yearMonth(event.getNewDate()))){
                 try {
-                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.MonthView(solarMap.getMonthGraphData(GetStartOf.yearMonth(event.getNewDate())));
+                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.MonthView(solarMap, GetStartOf.yearMonth(event.getNewDate()));
                     paintComponent();
                 } catch (ParseException e) {
                     e.printStackTrace();

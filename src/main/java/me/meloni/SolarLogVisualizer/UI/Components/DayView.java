@@ -26,7 +26,7 @@ public class DayView extends JPanel {
             if(solarMap.includesDay(event.getNewDate())){
                 try {
                     Date date = GetStartOf.day(event.getNewDate());
-                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.DayView(solarMap.getDayGraphData(date));
+                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.DayView(solarMap, date);
                     paintComponent();
                     instance.setDate(date.toString());
                 } catch (ParseException e) {
