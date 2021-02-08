@@ -1,18 +1,16 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
+import me.meloni.SolarLogAPI.BasicGUI.Components.YearPicker;
 import me.meloni.SolarLogAPI.SolarMap;
-import me.meloni.SolarLogAPI.BasicGUI.Components.DatePicker;
-import me.meloni.SolarLogAPI.DataConversion.GetStartOf;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.ParseException;
 import java.time.Year;
 
 public class YearView extends JPanel {
-    private me.meloni.SolarLogAPI.BasicGUI.Components.Graph.YearView cmp = null;
+    private me.meloni.SolarLogAPI.BasicGUI.Components.Graph.YearView graph = null;
     private final Visualizer instance;
 
     public YearView(Visualizer instance) {
@@ -20,21 +18,13 @@ public class YearView extends JPanel {
         SolarMap solarMap = instance.getSolarMap();
         setLayout(new BorderLayout());
 
-        DatePicker picker = new DatePicker();
-        picker.addVetoPolicy(solarMap);
+        YearPicker picker = new YearPicker();
         picker.setMaximumSize(new Dimension(200,40));
-        picker.addDateChangeListener(event -> {
-            if(solarMap.includesMonth(GetStartOf.yearMonth(event.getNewDate()))){
-                try {
-                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.YearView(solarMap, Year.of(event.getNewDate().getYear()));
-                    paintComponent();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                if(!(event.getOldDate() == null)){
-                    picker.setDate(event.getOldDate());
-                }
+        picker.addActionListener(event -> {
+            Year year = picker.getYear();
+            if(year != null && solarMap.includesYear(year)) {
+                graph = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.YearView(solarMap, year);
+                paintComponent();
             }
         });
         picker.setBackground(Colors.optionsColor);
@@ -60,15 +50,15 @@ public class YearView extends JPanel {
         b2.setForeground(Colors.fontColor);
         b3.setForeground(Colors.fontColor);
         b1.addActionListener(actionEvent -> {
-            cmp.setRow1Visible(b1.isSelected());
+            graph.setRow1Visible(b1.isSelected());
             paintComponent();
         });
         b2.addActionListener(actionEvent -> {
-            cmp.setRow2Visible(b2.isSelected());
+            graph.setRow2Visible(b2.isSelected());
             paintComponent();
         });
         b3.addActionListener(actionEvent -> {
-            cmp.setRow3Visible(b3.isSelected());
+            graph.setRow3Visible(b3.isSelected());
             paintComponent();
         });
         p.add(b1);
@@ -83,7 +73,7 @@ public class YearView extends JPanel {
         mouseGUI.setBackground(Colors.optionsColor);
         mouseGUI.setForeground(Colors.fontColor);
         mouseGUI.addActionListener(actionEvent -> {
-            cmp.setMouseGUIVisible(mouseGUI.isSelected());
+            graph.setMouseGUIVisible(mouseGUI.isSelected());
             paintComponent();
         });
         p.add(mouseGUI);
@@ -93,7 +83,7 @@ public class YearView extends JPanel {
     }
 
     public void paintComponent() {
-        cmp.setBackgroundColor(Colors.backgroundColor);
-        instance.setGraph(cmp);
+        graph.setBackgroundColor(Colors.backgroundColor);
+        instance.setGraph(graph);
     }
 }

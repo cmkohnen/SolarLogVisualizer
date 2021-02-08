@@ -1,14 +1,13 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogAPI.BasicGUI.Components.DatePicker;
 import me.meloni.SolarLogAPI.DataConversion.GetStartOf;
+import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.ParseException;
 import java.util.Date;
 
 public class DayView extends JPanel {
@@ -24,14 +23,10 @@ public class DayView extends JPanel {
         picker.setMaximumSize(new Dimension(200,40));
         picker.addDateChangeListener(event -> {
             if(solarMap.includesDay(event.getNewDate())){
-                try {
-                    Date date = GetStartOf.day(event.getNewDate());
-                    cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.DayView(solarMap, date);
-                    paintComponent();
-                    instance.setDate(date.toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                Date date = GetStartOf.day(event.getNewDate());
+                cmp = new me.meloni.SolarLogAPI.BasicGUI.Components.Graph.DayView(solarMap, date);
+                paintComponent();
+                instance.setDate(date.toString());
             } else {
                 if(!(event.getOldDate() == null)){
                     picker.setDate(event.getOldDate());

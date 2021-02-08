@@ -29,7 +29,7 @@ public class SolarMapCustomizer {
                 try {
                     solarMap.addFromDatFile(f);
                     setVisible(false);
-                } catch (IOException | ParseException ioException) {
+                } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
             }
@@ -37,14 +37,10 @@ public class SolarMapCustomizer {
 
         JButton addDirectory = new JButton("Add from Dat files");
         addDirectory.addActionListener(e -> {
-            try {
-                List<File> files = GetChosenFile.chosenDatFilesInDirectory();
-                if (!(files == null)) {
-                    solarMap.addFromDatFiles(files);
-                    setVisible(false);
-                }
-            } catch (IOException | ParseException ioException) {
-                ioException.printStackTrace();
+            List<File> files = GetChosenFile.chosenDatFilesInDirectory();
+            if (!(files == null)) {
+                solarMap.addFromDatFiles(files);
+                setVisible(false);
             }
         });
 
@@ -81,7 +77,7 @@ public class SolarMapCustomizer {
                 try {
                     solarMap.addFromSolarLogFile(f);
                     setVisible(false);
-                } catch (IOException | ClassNotFoundException ioException) {
+                } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
             }
@@ -91,21 +87,17 @@ public class SolarMapCustomizer {
         addFTPServer.addActionListener(e -> {
             try {
                 solarMap.addFromSolarMap(ImportFromFTP.importWithGUI());
-            } catch (ParseException | IOException | URISyntaxException Exception) {
+            } catch (IOException Exception) {
                 Exception.printStackTrace();
             }
         });
 
         JButton addJSFiles = new JButton("Add from JS Files");
         addJSFiles.addActionListener(e -> {
-            try {
-                List<File> files = GetChosenFile.chosenJSFilesInDirectory();
-                if (!(files == null)) {
-                    solarMap.addFromJSFiles(files);
-                    setVisible(false);
-                }
-            } catch (IOException | ParseException ioException) {
-                ioException.printStackTrace();
+            List<File> files = GetChosenFile.chosenJSFilesInDirectory();
+            if (!(files == null)) {
+                solarMap.addFromJSFiles(files);
+                setVisible(false);
             }
         });
 
