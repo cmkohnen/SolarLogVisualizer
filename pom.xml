@@ -15,7 +15,7 @@
         <dependency>
             <groupId>me.meloni</groupId>
             <artifactId>SolarLogAPI</artifactId>
-            <version>4.0.0</version>
+            <version>4.0.1</version>
             <scope>compile</scope>
         </dependency>
 
