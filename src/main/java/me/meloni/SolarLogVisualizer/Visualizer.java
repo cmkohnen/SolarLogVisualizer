@@ -26,5 +26,6 @@ public class Visualizer {
             Logger.warn("Unable to clear temporary storage!");
         }
         Logger.info(String.format("Visualizer exited: %s", message));
+        System.exit(0);
     }
 }
