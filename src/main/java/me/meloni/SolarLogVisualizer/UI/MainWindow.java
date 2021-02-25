@@ -6,6 +6,7 @@ import me.meloni.SolarLogVisualizer.Config.Values;
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowEvent;
 
 public class MainWindow extends JFrame {
     private static final int minHeight = Values.MINHEIGHT;
@@ -26,7 +27,7 @@ public class MainWindow extends JFrame {
 
     private void setupFrame() {
         setTitle("Visualization");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(1000,800);
         setBackground(Colors.backgroundColor);
@@ -62,5 +63,13 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+    }
+
+    @Override
+    public void processWindowEvent(WindowEvent e) {
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+            me.meloni.SolarLogVisualizer.Visualizer.exit("Window closed.");
+            dispose();
+        }
     }
 }
