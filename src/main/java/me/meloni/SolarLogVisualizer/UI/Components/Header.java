@@ -1,7 +1,7 @@
 package me.meloni.SolarLogVisualizer.UI.Components;
 
-import me.meloni.SolarLogAPI.BasicGUI.BasicSaveOptions;
 import me.meloni.SolarLogVisualizer.Config.Colors;
+import me.meloni.SolarLogVisualizer.UI.Popups.SaveOptions;
 import me.meloni.SolarLogVisualizer.UI.Popups.SolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
@@ -39,13 +39,15 @@ public class Header extends JPanel {
         button1.addActionListener(actionEvent -> solarMapCustomizer.setVisible(true));
         add(button1, c);
 
+        SaveOptions saveOptions = new SaveOptions(instance);
+
         JButton button2 = new JButton();
         button2.setBackground(Colors.buttonColor);
         JLabel button2Label = new JLabel("Save");
         button2Label.setFont(new Font("Courier", Font.PLAIN, 30));
         button2Label.setForeground(Colors.fontColor);
         button2.add(button2Label);
-        button2.addActionListener(actionEvent -> BasicSaveOptions.save(instance.getSolarMap()));
+        button2.addActionListener(actionEvent -> saveOptions.setVisible(true));
         add(button2, c);
 
     }

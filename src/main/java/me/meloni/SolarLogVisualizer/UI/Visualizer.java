@@ -1,7 +1,6 @@
 package me.meloni.SolarLogVisualizer.UI;
 
 import me.meloni.SolarLogAPI.SolarMap;
-import me.meloni.SolarLogAPI.BasicGUI.BasicSolarMapCustomizer;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Components.Header;
 import me.meloni.SolarLogVisualizer.UI.Components.Options;
@@ -11,7 +10,7 @@ import java.awt.*;
 
 public class Visualizer extends JPanel {
     MainWindow instance;
-    private SolarMap solarMap;
+    private final SolarMap solarMap;
     private JPanel graph;
     private final GridBagConstraints c = new GridBagConstraints();
     public Visualizer(MainWindow mainWindow) {
@@ -53,20 +52,8 @@ public class Visualizer extends JPanel {
         options.initialize(this);
     }
 
-    private void getSolarMapAsk() {
-        this.solarMap = BasicSolarMapCustomizer.solarMap();
-    }
-
-    public JPanel getGraph() {
-        return graph;
-    }
-
     public SolarMap getSolarMap() {
         return solarMap;
-    }
-
-    public void addToSolarMap(SolarMap solarMap) {
-        this.solarMap.addFromSolarMap(solarMap);
     }
 
     public void setGraph(JPanel newGraph) {

@@ -2,25 +2,21 @@ package me.meloni.SolarLogVisualizer.UI.Popups;
 
 import me.meloni.SolarLogAPI.BasicGUI.GetChosenFile;
 import me.meloni.SolarLogAPI.BasicGUI.ImportFromFTP;
-import me.meloni.SolarLogAPI.FileInteraction.GetFile;
 import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogVisualizer.UI.Visualizer;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.List;
 
-public class SolarMapCustomizer {
-    private final JFrame f;
+public class SolarMapCustomizer extends JFrame {
 
     public SolarMapCustomizer(Visualizer instance) {
         SolarMap solarMap = instance.getSolarMap();
-        JFrame frame = new JFrame();
         JPanel buttons = new JPanel();
-        frame.setLocationRelativeTo(instance);
+        setLocationRelativeTo(instance);
+        setSize(200, 600);
 
         JButton addFile = new JButton("Add from Dat file");
         addFile.addActionListener(e -> {
@@ -108,12 +104,6 @@ public class SolarMapCustomizer {
         buttons.add(addDataFile);
         buttons.add(addFTPServer);
         buttons.add(addJSFiles);
-        frame.add(buttons);
-        frame.setSize(200, 600);
-        f = frame;
-    }
-
-    public void setVisible(boolean visible) {
-        f.setVisible(visible);
+        add(buttons);
     }
 }
