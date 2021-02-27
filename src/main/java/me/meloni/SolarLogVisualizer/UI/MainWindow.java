@@ -23,12 +23,12 @@ import java.awt.event.WindowEvent;
 public class MainWindow extends JFrame {
     private static final int minHeight = Values.MINHEIGHT;
     private static final int minWidth = Values.MINWIDTH;
-    private final Visualizer content;
+    private final VisualizerPanel content;
     private final JPanel blank;
     private boolean tooSmall;
 
     public MainWindow() {
-        this.content = new Visualizer(this);
+        this.content = new VisualizerPanel(this);
         this.blank = new JPanel();
         setupFrame();
         setupComponents();

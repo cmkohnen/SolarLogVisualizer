@@ -13,12 +13,12 @@ limitations under the License.
 package me.meloni.SolarLogVisualizer.UI.Components;
 
 import me.meloni.SolarLogVisualizer.Config.Colors;
-import me.meloni.SolarLogVisualizer.UI.Visualizer;
+import me.meloni.SolarLogVisualizer.UI.VisualizerPanel;
 
 import javax.swing.*;
 
 public class Options extends JTabbedPane {
-    public void initialize(Visualizer instance) {
+    public void initialize(VisualizerPanel instance) {
         addTab("Day View", new DayView(instance));
         addTab("Month View", new MonthView(instance));
         addTab("Year View", new YearView(instance));

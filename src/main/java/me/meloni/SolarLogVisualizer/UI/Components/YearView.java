@@ -15,7 +15,7 @@ package me.meloni.SolarLogVisualizer.UI.Components;
 import me.meloni.SolarLogAPI.BasicGUI.Components.YearPicker;
 import me.meloni.SolarLogAPI.SolarMap;
 import me.meloni.SolarLogVisualizer.Config.Colors;
-import me.meloni.SolarLogVisualizer.UI.Visualizer;
+import me.meloni.SolarLogVisualizer.UI.VisualizerPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +23,9 @@ import java.time.Year;
 
 public class YearView extends JPanel {
     private me.meloni.SolarLogAPI.BasicGUI.Components.Graph.YearView graph = null;
-    private final Visualizer instance;
+    private final VisualizerPanel instance;
 
-    public YearView(Visualizer instance) {
+    public YearView(VisualizerPanel instance) {
         this.instance = instance;
         SolarMap solarMap = instance.getSolarMap();
         setLayout(new BorderLayout());
@@ -49,9 +49,9 @@ public class YearView extends JPanel {
         JCheckBox b1 = new JCheckBox();
         JCheckBox b2 = new JCheckBox();
         JCheckBox b3 = new JCheckBox();
-        b1.setText("Row 1");
-        b2.setText("Row 2");
-        b3.setText("Row 3");
+        b1.setText("consumption");
+        b2.setText("own consumption");
+        b3.setText("production");
         b1.setSelected(true);
         b2.setSelected(true);
         b3.setSelected(true);
@@ -62,16 +62,28 @@ public class YearView extends JPanel {
         b2.setForeground(Colors.fontColor);
         b3.setForeground(Colors.fontColor);
         b1.addActionListener(actionEvent -> {
-            graph.setRow1Visible(b1.isSelected());
-            paintComponent();
+            try {
+                graph.setRow1Visible(b1.isSelected());
+                paintComponent();
+            } catch (NullPointerException e) {
+                b1.setSelected(!b1.isSelected());
+            }
         });
         b2.addActionListener(actionEvent -> {
-            graph.setRow2Visible(b2.isSelected());
-            paintComponent();
+            try {
+                graph.setRow2Visible(b2.isSelected());
+                paintComponent();
+            } catch (NullPointerException e) {
+                b2.setSelected(!b2.isSelected());
+            }
         });
         b3.addActionListener(actionEvent -> {
-            graph.setRow3Visible(b3.isSelected());
-            paintComponent();
+            try {
+                graph.setRow3Visible(b3.isSelected());
+                paintComponent();
+            } catch (NullPointerException e) {
+                b3.setSelected(!b3.isSelected());
+            }
         });
         p.add(b1);
         p.add(b2);
@@ -85,8 +97,12 @@ public class YearView extends JPanel {
         mouseGUI.setBackground(Colors.optionsColor);
         mouseGUI.setForeground(Colors.fontColor);
         mouseGUI.addActionListener(actionEvent -> {
-            graph.setMouseGUIVisible(mouseGUI.isSelected());
-            paintComponent();
+            try {
+                graph.setMouseGUIVisible(mouseGUI.isSelected());
+                paintComponent();
+            } catch (NullPointerException e) {
+                mouseGUI.setSelected(!mouseGUI.isSelected());
+            }
         });
         p.add(mouseGUI);
 
@@ -97,5 +113,6 @@ public class YearView extends JPanel {
     public void paintComponent() {
         graph.setBackgroundColor(Colors.backgroundColor);
         instance.setGraph(graph);
+        instance.setTitle(graph.getTitle());
     }
 }

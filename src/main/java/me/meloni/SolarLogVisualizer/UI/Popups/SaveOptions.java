@@ -17,7 +17,7 @@ import me.meloni.SolarLogAPI.BasicGUI.GetDatabase;
 import me.meloni.SolarLogAPI.DatabaseInteraction.SQLDatabase;
 import me.meloni.SolarLogAPI.Handling.Logger;
 import me.meloni.SolarLogAPI.SolarMap;
-import me.meloni.SolarLogVisualizer.UI.Visualizer;
+import me.meloni.SolarLogVisualizer.UI.VisualizerPanel;
 
 import javax.swing.*;
 import java.io.File;
@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 public class SaveOptions extends JDialog {
 
-    public SaveOptions(Visualizer instance) {
+    public SaveOptions(VisualizerPanel instance) {
         SolarMap solarMap = instance.getSolarMap();
         JPanel buttons = new JPanel();
         setLocationRelativeTo(instance);

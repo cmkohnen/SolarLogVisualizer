@@ -13,9 +13,12 @@ limitations under the License.
 package me.meloni.SolarLogVisualizer.UI.Popups;
 
 import me.meloni.SolarLogAPI.BasicGUI.GetChosenFile;
+import me.meloni.SolarLogAPI.BasicGUI.GetDatabase;
 import me.meloni.SolarLogAPI.BasicGUI.ImportFromFTP;
+import me.meloni.SolarLogAPI.DatabaseInteraction.InfluxDatabase;
+import me.meloni.SolarLogAPI.Handling.Logger;
 import me.meloni.SolarLogAPI.SolarMap;
-import me.meloni.SolarLogVisualizer.UI.Visualizer;
+import me.meloni.SolarLogVisualizer.UI.VisualizerPanel;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,53 +27,93 @@ import java.util.List;
 
 public class SolarMapCustomizer extends JDialog {
 
-    public SolarMapCustomizer(Visualizer instance) {
+    public SolarMapCustomizer(VisualizerPanel instance) {
         SolarMap solarMap = instance.getSolarMap();
         JPanel buttons = new JPanel();
         setLocationRelativeTo(instance);
         setSize(200, 600);
 
-        JButton addFile = new JButton("Add from Dat file");
-        addFile.addActionListener(e -> {
+        JButton addDatFile = new JButton("Add .dat-file");
+        addDatFile.addActionListener(e -> {
             File f = GetChosenFile.chosenDatFile();
-            if (!(f == null) && f.exists()) {
+            if(!(f == null) && f.exists()) {
                 try {
                     solarMap.addFromDatFile(f);
-                    setVisible(false);
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                    Logger.warn(ioException.getMessage());
                 }
+                setVisible(false);
             }
         });
 
-        JButton addDirectory = new JButton("Add from Dat files");
-        addDirectory.addActionListener(e -> {
+        JButton addDatFiles = new JButton("Add .dat-files");
+        addDatFiles.addActionListener(e -> {
             List<File> files = GetChosenFile.chosenDatFilesInDirectory();
-            if (!(files == null)) {
+            if(!(files == null)) {
                 solarMap.addFromDatFiles(files);
                 setVisible(false);
             }
         });
 
-        JButton addTar = new JButton("Add from tar archive");
-        addTar.addActionListener(e -> {
+        JButton addTarArchive = new JButton("Add tar archive");
+        addTarArchive.addActionListener(e -> {
             File f = GetChosenFile.chosenTarArchive();
-            if (!(f == null) && f.exists()) {
+            if(!(f == null) && f.exists()) {
                 try {
                     solarMap.addFromTarArchive(f);
-                    setVisible(false);
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    Logger.warn(exception.getMessage());
                 }
+                setVisible(false);
             }
         });
 
-        JButton addTars = new JButton("Add from tar archives");
-        addTars.addActionListener(e -> {
+        JButton addTarArchives = new JButton("Add tar archives");
+        addTarArchives.addActionListener(e -> {
             try {
                 List<File> files = GetChosenFile.chosenTarArchivesInDirectory();
-                if (!(files == null)) {
+                if(!(files == null)) {
                     solarMap.addFromTarArchives(files);
+                    setVisible(false);
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            setVisible(false);
+        });
+
+        JButton addSolarLogFile = new JButton("Add data file");
+        addSolarLogFile.addActionListener(e -> {
+            File f = GetChosenFile.chosenSolarLogFile();
+            if(!(f == null) && f.exists()) {
+                try {
+                    solarMap.addFromSolarLogFile(f);
+                } catch (IOException ioException) {
+                    Logger.warn(ioException.getMessage());
+                }
+                setVisible(false);
+            }
+        });
+
+        JButton addEMLFile = new JButton("Add .eml-file");
+        addEMLFile.addActionListener(e -> {
+            File f = GetChosenFile.chosenEMLFile();
+            if(!(f == null) && f.exists()) {
+                try {
+                    solarMap.addFromEMLFile(f);
+                } catch (Exception exception) {
+                    Logger.warn(exception.getMessage());
+                }
+                setVisible(false);
+            }
+        });
+
+        JButton addEMLFiles = new JButton("Add .eml-files");
+        addEMLFiles.addActionListener(e -> {
+            try {
+                List<File> files = GetChosenFile.chosenEMLFilesInDirectory();
+                if(!(files == null)) {
+                    solarMap.addFromEMLFiles(files);
                     setVisible(false);
                 }
             } catch (Exception exception) {
@@ -78,45 +121,60 @@ public class SolarMapCustomizer extends JDialog {
             }
         });
 
-        JButton addDataFile = new JButton("Add from Data File");
-        addDataFile.addActionListener(e -> {
-            File f = GetChosenFile.chosenSolarLogFile();
-            if (!(f == null) && f.exists()) {
+        JButton addInfluxDB = new JButton("Add InfluxDB");
+        addInfluxDB.addActionListener(e -> {
+            InfluxDatabase db = GetDatabase.influxDatabase();
+            solarMap.addFromInfluxDB(db.getInfluxDB(), db.getDatabase());
+            setVisible(false);
+        });
+
+        JButton addJSFile = new JButton("Add .js-file");
+        addJSFile.addActionListener(e -> {
+            File f = GetChosenFile.chosenJSFile();
+            if(!(f == null) && f.exists()) {
                 try {
-                    solarMap.addFromSolarLogFile(f);
-                    setVisible(false);
+                    solarMap.addFromJSFile(f);
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                    Logger.warn(ioException.getMessage());
                 }
+                setVisible(false);
             }
         });
 
-        JButton addFTPServer = new JButton("Add from FTP Server");
-        addFTPServer.addActionListener(e -> {
+        JButton addJSFiles = new JButton("Add .js-files");
+        addJSFiles.addActionListener(e -> {
+            try {
+                List<File> files = GetChosenFile.chosenJSFilesInDirectory();
+                if(!(files == null)) {
+                    solarMap.addFromEMLFiles(files);
+                    setVisible(false);
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        JButton addFromFTP = new JButton("Add FTP-server");
+        addFromFTP.addActionListener(e -> {
             try {
                 solarMap.addFromSolarMap(ImportFromFTP.importWithGUI());
-                setVisible(false);
-            } catch (IOException Exception) {
-                Exception.printStackTrace();
+            } catch (IOException ioException) {
+                Logger.warn(ioException.getMessage());
             }
+            setVisible(false);
         });
 
-        JButton addJSFiles = new JButton("Add from JS Files");
-        addJSFiles.addActionListener(e -> {
-            List<File> files = GetChosenFile.chosenJSFilesInDirectory();
-            if (!(files == null)) {
-                solarMap.addFromJSFiles(files);
-                setVisible(false);
-            }
-        });
-
-        buttons.add(addFile);
-        buttons.add(addDirectory);
-        buttons.add(addTar);
-        buttons.add(addTars);
-        buttons.add(addDataFile);
-        buttons.add(addFTPServer);
+        buttons.add(addDatFile);
+        buttons.add(addDatFiles);
+        buttons.add(addTarArchive);
+        buttons.add(addTarArchives);
+        buttons.add(addSolarLogFile);
+        buttons.add(addEMLFile);
+        buttons.add(addEMLFiles);
+        buttons.add(addInfluxDB);
+        buttons.add(addJSFile);
         buttons.add(addJSFiles);
+        buttons.add(addFromFTP);
         add(buttons);
     }
 }

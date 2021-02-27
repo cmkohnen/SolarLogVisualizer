@@ -15,14 +15,14 @@ package me.meloni.SolarLogVisualizer.UI.Components;
 import me.meloni.SolarLogVisualizer.Config.Colors;
 import me.meloni.SolarLogVisualizer.UI.Popups.SaveOptions;
 import me.meloni.SolarLogVisualizer.UI.Popups.SolarMapCustomizer;
-import me.meloni.SolarLogVisualizer.UI.Visualizer;
+import me.meloni.SolarLogVisualizer.UI.VisualizerPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Header extends JPanel {
-    Visualizer instance;
-    public Header(Visualizer instance) {
+    VisualizerPanel instance;
+    public Header(VisualizerPanel instance) {
         this.instance = instance;
 
         setBackground(Colors.backgroundColor);

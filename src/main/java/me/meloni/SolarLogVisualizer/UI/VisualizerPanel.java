@@ -20,12 +20,12 @@ import me.meloni.SolarLogVisualizer.UI.Components.Options;
 import javax.swing.*;
 import java.awt.*;
 
-public class Visualizer extends JPanel {
+public class VisualizerPanel extends JPanel {
     MainWindow instance;
     private final SolarMap solarMap;
     private JPanel graph;
     private final GridBagConstraints c = new GridBagConstraints();
-    public Visualizer(MainWindow mainWindow) {
+    public VisualizerPanel(MainWindow mainWindow) {
         this.instance = mainWindow;
         this.solarMap = new SolarMap();
         setLayout(new GridBagLayout());
@@ -87,8 +87,8 @@ public class Visualizer extends JPanel {
         setVisible(true);
     }
 
-    public void setDate(String date) {
-        instance.setTitle("Visualize - " + date);
+    public void setTitle(String title) {
+        instance.setTitle(title);
     }
 
 }
