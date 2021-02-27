@@ -68,6 +68,10 @@ public class Visualizer extends JPanel {
         return solarMap;
     }
 
+    public MainWindow window() {
+        return instance;
+    }
+
     public void setGraph(JPanel newGraph) {
         remove(this.graph);
         this.graph = newGraph;

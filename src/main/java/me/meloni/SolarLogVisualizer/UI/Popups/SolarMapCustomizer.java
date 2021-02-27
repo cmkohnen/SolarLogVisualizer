@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class SolarMapCustomizer extends JFrame {
+public class SolarMapCustomizer extends JDialog {
 
     public SolarMapCustomizer(Visualizer instance) {
         SolarMap solarMap = instance.getSolarMap();
@@ -95,6 +95,7 @@ public class SolarMapCustomizer extends JFrame {
         addFTPServer.addActionListener(e -> {
             try {
                 solarMap.addFromSolarMap(ImportFromFTP.importWithGUI());
+                setVisible(false);
             } catch (IOException Exception) {
                 Exception.printStackTrace();
             }

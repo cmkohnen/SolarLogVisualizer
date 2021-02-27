@@ -16,6 +16,7 @@ import me.meloni.SolarLogAPI.Handling.Logger;
 import me.meloni.SolarLogVisualizer.Config.WorkingDirectoryManager;
 import me.meloni.SolarLogVisualizer.UI.MainWindow;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Visualizer {
@@ -25,6 +26,7 @@ public class Visualizer {
             WorkingDirectoryManager.createDirectory();
             new MainWindow();
         } catch (IOException e) {
+            JOptionPane.showMessageDialog( null,"Visualizer was not able to access file system!");
             exit(e.getMessage());
         }
     }

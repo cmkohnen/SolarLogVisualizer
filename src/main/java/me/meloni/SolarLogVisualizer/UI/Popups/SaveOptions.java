@@ -24,7 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SaveOptions extends JFrame {
+public class SaveOptions extends JDialog {
 
     public SaveOptions(Visualizer instance) {
         SolarMap solarMap = instance.getSolarMap();
