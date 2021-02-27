@@ -146,7 +146,7 @@ public class SolarMapCustomizer extends JDialog {
             try {
                 List<File> files = GetChosenFile.chosenJSFilesInDirectory();
                 if(!(files == null)) {
-                    solarMap.addFromEMLFiles(files);
+                    solarMap.addFromJSFiles(files);
                     setVisible(false);
                 }
             } catch (Exception exception) {
